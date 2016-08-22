@@ -7,13 +7,17 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		110405731D6566260045F1E1 /* main_back.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 110405721D6566260045F1E1 /* main_back.jpg */; };
+		110405781D65683E0045F1E1 /* YLNavgationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 110405771D65683E0045F1E1 /* YLNavgationViewController.swift */; };
+		1104057A1D65A4A80045F1E1 /* YLMainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 110405791D65A4A80045F1E1 /* YLMainViewController.swift */; };
+		1104057C1D65A8270045F1E1 /* transparent.png in Resources */ = {isa = PBXBuildFile; fileRef = 1104057B1D65A8270045F1E1 /* transparent.png */; };
+		1104057F1D6AA0B00045F1E1 /* YLCommon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1104057E1D6AA0B00045F1E1 /* YLCommon.swift */; };
 		11DFA4451D641758003F46E6 /* bomb.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 11DFA4401D641758003F46E6 /* bomb.mp3 */; };
 		11DFA4461D641758003F46E6 /* empty.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 11DFA4411D641758003F46E6 /* empty.mp3 */; };
 		11DFA4471D641758003F46E6 /* flag.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 11DFA4421D641758003F46E6 /* flag.mp3 */; };
 		11DFA4481D641758003F46E6 /* scan.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 11DFA4431D641758003F46E6 /* scan.mp3 */; };
 		11DFA4491D641758003F46E6 /* start.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 11DFA4441D641758003F46E6 /* start.mp3 */; };
 		11E014FB1D629F950034181B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11E014FA1D629F950034181B /* AppDelegate.swift */; };
-		11E014FD1D629F950034181B /* YLMainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11E014FC1D629F950034181B /* YLMainViewController.swift */; };
 		11E015001D629F950034181B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 11E014FE1D629F950034181B /* Main.storyboard */; };
 		11E015021D629F950034181B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 11E015011D629F950034181B /* Assets.xcassets */; };
 		11E015051D629F950034181B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 11E015031D629F950034181B /* LaunchScreen.storyboard */; };
@@ -21,6 +25,11 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		110405721D6566260045F1E1 /* main_back.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = main_back.jpg; sourceTree = "<group>"; };
+		110405771D65683E0045F1E1 /* YLNavgationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YLNavgationViewController.swift; sourceTree = "<group>"; };
+		110405791D65A4A80045F1E1 /* YLMainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YLMainViewController.swift; sourceTree = "<group>"; };
+		1104057B1D65A8270045F1E1 /* transparent.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = transparent.png; sourceTree = "<group>"; };
+		1104057E1D6AA0B00045F1E1 /* YLCommon.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YLCommon.swift; sourceTree = "<group>"; };
 		11DFA4401D641758003F46E6 /* bomb.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = bomb.mp3; sourceTree = "<group>"; };
 		11DFA4411D641758003F46E6 /* empty.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = empty.mp3; sourceTree = "<group>"; };
 		11DFA4421D641758003F46E6 /* flag.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = flag.mp3; sourceTree = "<group>"; };
@@ -28,7 +37,6 @@
 		11DFA4441D641758003F46E6 /* start.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = start.mp3; sourceTree = "<group>"; };
 		11E014F71D629F950034181B /* YLSaoLei.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = YLSaoLei.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		11E014FA1D629F950034181B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		11E014FC1D629F950034181B /* YLMainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YLMainViewController.swift; sourceTree = "<group>"; };
 		11E014FF1D629F950034181B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		11E015011D629F950034181B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		11E015041D629F950034181B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -50,6 +58,32 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		110405711D6565D00045F1E1 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				110405721D6566260045F1E1 /* main_back.jpg */,
+				1104057B1D65A8270045F1E1 /* transparent.png */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
+		110405741D65673D0045F1E1 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				110405771D65683E0045F1E1 /* YLNavgationViewController.swift */,
+				110405791D65A4A80045F1E1 /* YLMainViewController.swift */,
+			);
+			name = ViewController;
+			sourceTree = "<group>";
+		};
+		1104057D1D6AA07E0045F1E1 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				1104057E1D6AA0B00045F1E1 /* YLCommon.swift */,
+			);
+			name = Utils;
+			sourceTree = "<group>";
+		};
 		11DFA43F1D641758003F46E6 /* raw */ = {
 			isa = PBXGroup;
 			children = (
@@ -84,8 +118,10 @@
 		11E014F91D629F950034181B /* YLSaoLei */ = {
 			isa = PBXGroup;
 			children = (
+				1104057D1D6AA07E0045F1E1 /* Utils */,
+				110405741D65673D0045F1E1 /* ViewController */,
+				110405711D6565D00045F1E1 /* Resources */,
 				11E014FA1D629F950034181B /* AppDelegate.swift */,
-				11E014FC1D629F950034181B /* YLMainViewController.swift */,
 				11E014FE1D629F950034181B /* Main.storyboard */,
 				11E015011D629F950034181B /* Assets.xcassets */,
 				11E015031D629F950034181B /* LaunchScreen.storyboard */,
@@ -172,6 +208,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1104057C1D65A8270045F1E1 /* transparent.png in Resources */,
 				11E015051D629F950034181B /* LaunchScreen.storyboard in Resources */,
 				11E015021D629F950034181B /* Assets.xcassets in Resources */,
 				11DFA4471D641758003F46E6 /* flag.mp3 in Resources */,
@@ -179,6 +216,7 @@
 				11DFA4451D641758003F46E6 /* bomb.mp3 in Resources */,
 				11DFA4491D641758003F46E6 /* start.mp3 in Resources */,
 				11E015001D629F950034181B /* Main.storyboard in Resources */,
+				110405731D6566260045F1E1 /* main_back.jpg in Resources */,
 				11DFA4481D641758003F46E6 /* scan.mp3 in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -238,8 +276,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				11E014FD1D629F950034181B /* YLMainViewController.swift in Sources */,
+				1104057A1D65A4A80045F1E1 /* YLMainViewController.swift in Sources */,
 				11E014FB1D629F950034181B /* AppDelegate.swift in Sources */,
+				110405781D65683E0045F1E1 /* YLNavgationViewController.swift in Sources */,
+				1104057F1D6AA0B00045F1E1 /* YLCommon.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -354,6 +394,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = YLSaoLei/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.pisen.qianjituanpisen.YLSaoLei;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -367,6 +408,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = YLSaoLei/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.pisen.qianjituanpisen.YLSaoLei;
 				PRODUCT_NAME = "$(TARGET_NAME)";
