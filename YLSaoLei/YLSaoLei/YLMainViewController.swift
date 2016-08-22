@@ -20,13 +20,14 @@ class YLMainViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        print(" MAIN_HEIGHT:\( MAIN_HEIGHT),MAIN_WIDTH\(MAIN_WIDTH)")
+        self.title = " "
+       // print(" MAIN_HEIGHT:\( MAIN_HEIGHT),MAIN_WIDTH\(MAIN_WIDTH)")
         setupView();
 
         // Do any additional setup after loading the view.
     }
     override func viewDidAppear(animated: Bool) {
-        print("viewDidAppear: MAIN_HEIGHT:\( MAIN_HEIGHT),MAIN_WIDTH\(MAIN_WIDTH)")
+       // print("viewDidAppear: MAIN_HEIGHT:\( MAIN_HEIGHT),MAIN_WIDTH\(MAIN_WIDTH)")
     }
 
     override func didReceiveMemoryWarning() {
@@ -35,12 +36,14 @@ class YLMainViewController: UIViewController {
     }
 
     override func willAnimateRotationToInterfaceOrientation(toInterfaceOrientation: UIInterfaceOrientation, duration: NSTimeInterval) {
-         print(" MAIN_HEIGHT:\( MAIN_HEIGHT),MAIN_WIDTH\(MAIN_WIDTH)")
+        // print(" MAIN_HEIGHT:\( MAIN_HEIGHT),MAIN_WIDTH\(MAIN_WIDTH)")
         switch toInterfaceOrientation {
         case .Portrait:
             titleImageView.snp_updateConstraints(closure: { (make) in
-                make.top.equalTo(self.view.snp_top).offset(MAIN_HEIGHT/3);
+                make.centerX.equalTo(self.view.snp_centerX);
                 make.width.equalTo(180)
+                make.height.equalTo(100)
+                make.top.equalTo(self.view.snp_top).offset(MAIN_HEIGHT/5);
 
             })
             startGameBtn.snp_updateConstraints(closure: { (make) in
@@ -54,8 +57,8 @@ class YLMainViewController: UIViewController {
             })
         default:
             titleImageView.snp_updateConstraints(closure: { (make) in
-                make.top.equalTo(self.view.snp_top).offset(MAIN_HEIGHT/7);
                 make.width.equalTo(240)
+                make.top.equalTo(self.view.snp_top).offset(MAIN_HEIGHT/7);
             })
             startGameBtn.snp_updateConstraints(closure: { (make) in
                 make.centerX.equalTo(self.view.snp_centerX)
@@ -86,7 +89,7 @@ class YLMainViewController: UIViewController {
             make.centerX.equalTo(self.view.snp_centerX);
             make.width.equalTo(180)
             make.height.equalTo(100)
-            make.top.equalTo(self.view.snp_top).offset(MAIN_HEIGHT/3);
+            make.top.equalTo(self.view.snp_top).offset(MAIN_HEIGHT/5);
         }
         
         startGameBtn.setBackgroundImage(UIImage(named:"btn_main_select" ), forState: .Normal)
@@ -118,6 +121,8 @@ class YLMainViewController: UIViewController {
     
     
     func startBtnAction(){
+        let gameVC = YLGameViewController()
+        navigationController?.pushViewController(gameVC, animated: true)
         print("开始游戏")
     }
     

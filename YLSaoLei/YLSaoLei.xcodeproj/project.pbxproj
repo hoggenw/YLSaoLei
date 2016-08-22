@@ -12,6 +12,7 @@
 		1104057A1D65A4A80045F1E1 /* YLMainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 110405791D65A4A80045F1E1 /* YLMainViewController.swift */; };
 		1104057C1D65A8270045F1E1 /* transparent.png in Resources */ = {isa = PBXBuildFile; fileRef = 1104057B1D65A8270045F1E1 /* transparent.png */; };
 		1104057F1D6AA0B00045F1E1 /* YLCommon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1104057E1D6AA0B00045F1E1 /* YLCommon.swift */; };
+		110405811D6AA6E20045F1E1 /* YLGameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 110405801D6AA6E20045F1E1 /* YLGameViewController.swift */; };
 		11DFA4451D641758003F46E6 /* bomb.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 11DFA4401D641758003F46E6 /* bomb.mp3 */; };
 		11DFA4461D641758003F46E6 /* empty.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 11DFA4411D641758003F46E6 /* empty.mp3 */; };
 		11DFA4471D641758003F46E6 /* flag.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 11DFA4421D641758003F46E6 /* flag.mp3 */; };
@@ -30,6 +31,7 @@
 		110405791D65A4A80045F1E1 /* YLMainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YLMainViewController.swift; sourceTree = "<group>"; };
 		1104057B1D65A8270045F1E1 /* transparent.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = transparent.png; sourceTree = "<group>"; };
 		1104057E1D6AA0B00045F1E1 /* YLCommon.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YLCommon.swift; sourceTree = "<group>"; };
+		110405801D6AA6E20045F1E1 /* YLGameViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YLGameViewController.swift; sourceTree = "<group>"; };
 		11DFA4401D641758003F46E6 /* bomb.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = bomb.mp3; sourceTree = "<group>"; };
 		11DFA4411D641758003F46E6 /* empty.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = empty.mp3; sourceTree = "<group>"; };
 		11DFA4421D641758003F46E6 /* flag.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = flag.mp3; sourceTree = "<group>"; };
@@ -72,6 +74,7 @@
 			children = (
 				110405771D65683E0045F1E1 /* YLNavgationViewController.swift */,
 				110405791D65A4A80045F1E1 /* YLMainViewController.swift */,
+				110405801D6AA6E20045F1E1 /* YLGameViewController.swift */,
 			);
 			name = ViewController;
 			sourceTree = "<group>";
@@ -276,6 +279,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				110405811D6AA6E20045F1E1 /* YLGameViewController.swift in Sources */,
 				1104057A1D65A4A80045F1E1 /* YLMainViewController.swift in Sources */,
 				11E014FB1D629F950034181B /* AppDelegate.swift in Sources */,
 				110405781D65683E0045F1E1 /* YLNavgationViewController.swift in Sources */,
