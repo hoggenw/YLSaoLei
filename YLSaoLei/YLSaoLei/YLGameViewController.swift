@@ -11,11 +11,24 @@ import UIKit
 class YLGameViewController: UIViewController {
     
     let titleLabel = UILabel()
+    let stepLabel = UILabel()
+    let timeLabel = UILabel()
+    let timer = NSTimer()
+    
+    var step :Int? {
+        didSet {
+            stepLabel.text = NSString.localizedStringWithFormat("步数：%04d", step!) as String
+        }
+    }
+    var time :Int? {
+        didSet {
+            timeLabel.text = String.localizedStringWithFormat("耗时：%04d", time!) as String
+        }
+    }
     
 
     override func viewDidLoad() {
         super.viewDidLoad()
-    
         setupView();
         // Do any additional setup after loading the view.
     }
@@ -42,6 +55,40 @@ class YLGameViewController: UIViewController {
             make.width.equalTo(120)
             make.centerX.equalTo(self.view.snp_centerX)
         }
+        
+        let timeImageView = UIImageView()
+        timeImageView.image = UIImage(named:"game_clock")
+        self.view.addSubview(timeImageView);
+        timeImageView.snp_makeConstraints { (make) in
+            make.top.equalTo(titleLabel.snp_bottom).offset(10)
+            make.width.height.equalTo(40)
+            make.centerX.equalTo(self.view.snp_centerX)
+            
+        }
+        
+        stepLabel.textColor = UIColor.whiteColor()
+        stepLabel.font = UIFont.systemFontOfSize(16)
+        stepLabel.textAlignment = .Center
+        self.view.addSubview(stepLabel)
+        stepLabel.snp_makeConstraints { (make) in
+            make.left.equalTo(self.view.snp_left).offset(20)
+            make.right.equalTo(timeImageView.snp_left).offset(-20);
+            make.centerY.equalTo(timeImageView.snp_centerY)
+        }
+        
+        step = 0
+        
+        timeLabel.textColor = UIColor.whiteColor()
+        timeLabel.font = UIFont.systemFontOfSize(16)
+        timeLabel.textAlignment = .Center
+        self.view.addSubview(timeLabel)
+        timeLabel.snp_makeConstraints { (make) in
+            make.right.equalTo(self.view.snp_right).offset(-20)
+            make.left.equalTo(timeImageView.snp_right).offset(20);
+            make.centerY.equalTo(timeImageView.snp_centerY)
+        }
+        time = 0
+        
         
     }
     
