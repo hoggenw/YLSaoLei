@@ -13,7 +13,9 @@ class YLGameViewController: UIViewController {
     let titleLabel = UILabel()
     let stepLabel = UILabel()
     let timeLabel = UILabel()
-    let timer = NSTimer()
+    let bomeLabel = UILabel()
+    var timer = NSTimer()
+    let gameBackView = UIView()
     
     var step :Int? {
         didSet {
@@ -26,7 +28,19 @@ class YLGameViewController: UIViewController {
         }
     }
     
+    var leftBome :Int? {
+        didSet {
+            
+             bomeLabel.text = String.localizedStringWithFormat("老婆加油！还有%d颗地雷没被发现", leftBome!) as String
+        }
+    }
+    
 
+    override func viewDidDisappear(animated: Bool) {
+        super.viewDidDisappear(animated)
+        self.timer.invalidate()
+    }
+    //主流程
     override func viewDidLoad() {
         super.viewDidLoad()
         setupView();
@@ -65,6 +79,62 @@ class YLGameViewController: UIViewController {
             make.centerX.equalTo(self.view.snp_centerX)
             
         }
+        //创建游戏界面
+        setupGameView()
+        
+        //bak_line2_text
+        leftBome = 10
+        let hintImageView = UIImageView()
+        hintImageView.image = UIImage(named: "bak_line2_text")
+        self.view.addSubview(hintImageView)
+        hintImageView.snp_makeConstraints { (make) in
+            make.top.equalTo(self.gameBackView.snp_bottom).offset(20)
+            make.left.equalTo(self.view.snp_left).offset(25)
+            make.right.equalTo(self.view.snp_right).offset(-25)
+            make.height.equalTo(45)
+        }
+        let bomeImageView = UIImageView()
+        bomeImageView.image = UIImage(named: "bomb_revealed")
+        hintImageView.addSubview(bomeImageView)
+        bomeImageView.snp_makeConstraints { (make) in
+            make.top.bottom.equalTo(hintImageView)
+            make.left.equalTo(hintImageView.snp_left).offset(10)
+            make.width.equalTo(45)
+        }
+        
+        bomeLabel.textColor = UIColor.whiteColor()
+        bomeLabel.textAlignment = .Left
+        bomeLabel.adjustsFontSizeToFitWidth = true
+        hintImageView.addSubview(bomeLabel)
+        bomeLabel.snp_makeConstraints { (make) in
+            make.top.bottom.equalTo(hintImageView)
+            make.left.equalTo(bomeImageView.snp_right).offset(2)
+            make.right.equalTo(hintImageView.snp_right).offset(-10)
+        }
+        
+        let refreshButton = UIButton()
+        refreshButton.setImage(UIImage(named: "btn_dailog_reset"), forState: .Normal)
+        let btnWidth = (MAIN_WIDTH-100)/5
+        refreshButton.addTarget(self, action: #selector(refreshButtonAction), forControlEvents: .TouchUpInside)
+        self.view.addSubview(refreshButton)
+        refreshButton.snp_makeConstraints { (make) in
+            make.top.equalTo(hintImageView.snp_bottom).offset(20)
+            make.left.equalTo(self.view.snp_left).offset(40+btnWidth)
+            make.width.equalTo(btnWidth)
+            make.height.equalTo(btnWidth)
+        }
+        
+        let signButton = UIButton()
+        signButton.setBackgroundImage(UIImage(named:"game_mine_flag" ), forState: .Normal)
+        signButton.addTarget(self, action: #selector(signButtonAction), forControlEvents: .TouchUpInside)
+        self.view.addSubview(signButton)
+        signButton.snp_makeConstraints { (make) in
+            make.top.equalTo(hintImageView.snp_bottom).offset(20)
+            make.left.equalTo(self.view.snp_left).offset(60+3*btnWidth)
+            make.width.equalTo(btnWidth)
+            make.height.equalTo(btnWidth)
+        }
+        
         
         stepLabel.textColor = UIColor.whiteColor()
         stepLabel.font = UIFont.systemFontOfSize(16)
@@ -88,10 +158,72 @@ class YLGameViewController: UIViewController {
             make.centerY.equalTo(timeImageView.snp_centerY)
         }
         time = 0
-        
+        timer = NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector: #selector(timeGo), userInfo: nil, repeats: true)
+//        timer.fire()
+        NSRunLoop.currentRunLoop().addTimer(timer, forMode:NSDefaultRunLoopMode)
+    }
+    
+    //刷新
+    func refreshButtonAction(){
+        self.step = 0
+        self.time = 0
+    }
+    //标记
+    func signButtonAction(){
         
     }
     
+    //创建游戏界面
+    func setupGameView(){
+        let btnWidth:CGFloat = (MAIN_WIDTH - 20 - 7*2)/10
+        gameBackView.backgroundColor = UIColor.clearColor()
+        self.view .addSubview(gameBackView)
+        gameBackView.snp_makeConstraints { (make) in
+            make.top.equalTo(self.view.snp_top).offset(110)
+            make.left.right.equalTo(self.view).offset(10)
+            make.height.equalTo(MAIN_WIDTH-20)
+        }
+        
+        for index in 0 ..< LEVEL_ONE {
+            
+            for indexY in 0..<LEVEL_ONE {
+                
+                let button = UIButton()
+                button.tag = 10*index+indexY+200;
+                button.setBackgroundImage(UIImage(named: "game_mine_default"), forState: .Normal)
+                self.gameBackView.addSubview(button)
+                let height = CGFloat(index)*(btnWidth+2)
+                button.snp_makeConstraints(closure: { (make) in
+                     make.top.equalTo(self.gameBackView.snp_top).offset(height)
+                     make.height.width.equalTo(btnWidth)
+                     make.left.equalTo(CGFloat(indexY)*(btnWidth+2))
+                })
+                
+            }
+            
+        }
+    
+        
+    }
+    
+    func leftBomeChanged(leftBome:Int) -> NSAttributedString {
+        let returnAttributedString = NSMutableAttributedString.init(string:String.localizedStringWithFormat("老婆加油！还有%d颗地雷没被发现", leftBome))
+        let string = String.localizedStringWithFormat("%d", leftBome)
+        let freRange = returnAttributedString.string.rangeOfString(string) as! NSRange
+        let attributesDict = [NSForegroundColorAttributeName:UIColor.greenColor()]
+        returnAttributedString.setAttributes(attributesDict, range:freRange)
+        return returnAttributedString;
+        
+    }
+    
+    func timeGo(){
+        time = time! + 1
+        
+        if time > 9999 {
+            time = 9999
+            timer.invalidate()
+        }
+    }
 
     /*
     // MARK: - Navigation
