@@ -13,6 +13,7 @@
 		1104057C1D65A8270045F1E1 /* transparent.png in Resources */ = {isa = PBXBuildFile; fileRef = 1104057B1D65A8270045F1E1 /* transparent.png */; };
 		1104057F1D6AA0B00045F1E1 /* YLCommon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1104057E1D6AA0B00045F1E1 /* YLCommon.swift */; };
 		110405811D6AA6E20045F1E1 /* YLGameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 110405801D6AA6E20045F1E1 /* YLGameViewController.swift */; };
+		1151F5901D6E9FD900F6E847 /* YLButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1151F58F1D6E9FD800F6E847 /* YLButton.swift */; };
 		11DFA4451D641758003F46E6 /* bomb.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 11DFA4401D641758003F46E6 /* bomb.mp3 */; };
 		11DFA4461D641758003F46E6 /* empty.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 11DFA4411D641758003F46E6 /* empty.mp3 */; };
 		11DFA4471D641758003F46E6 /* flag.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 11DFA4421D641758003F46E6 /* flag.mp3 */; };
@@ -32,6 +33,7 @@
 		1104057B1D65A8270045F1E1 /* transparent.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = transparent.png; sourceTree = "<group>"; };
 		1104057E1D6AA0B00045F1E1 /* YLCommon.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YLCommon.swift; sourceTree = "<group>"; };
 		110405801D6AA6E20045F1E1 /* YLGameViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YLGameViewController.swift; sourceTree = "<group>"; };
+		1151F58F1D6E9FD800F6E847 /* YLButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YLButton.swift; sourceTree = "<group>"; };
 		11DFA4401D641758003F46E6 /* bomb.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = bomb.mp3; sourceTree = "<group>"; };
 		11DFA4411D641758003F46E6 /* empty.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = empty.mp3; sourceTree = "<group>"; };
 		11DFA4421D641758003F46E6 /* flag.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = flag.mp3; sourceTree = "<group>"; };
@@ -87,6 +89,14 @@
 			name = Utils;
 			sourceTree = "<group>";
 		};
+		1151F58E1D6E9FA700F6E847 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				1151F58F1D6E9FD800F6E847 /* YLButton.swift */,
+			);
+			name = View;
+			sourceTree = "<group>";
+		};
 		11DFA43F1D641758003F46E6 /* raw */ = {
 			isa = PBXGroup;
 			children = (
@@ -121,6 +131,7 @@
 		11E014F91D629F950034181B /* YLSaoLei */ = {
 			isa = PBXGroup;
 			children = (
+				1151F58E1D6E9FA700F6E847 /* View */,
 				1104057D1D6AA07E0045F1E1 /* Utils */,
 				110405741D65673D0045F1E1 /* ViewController */,
 				110405711D6565D00045F1E1 /* Resources */,
@@ -279,6 +290,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1151F5901D6E9FD900F6E847 /* YLButton.swift in Sources */,
 				110405811D6AA6E20045F1E1 /* YLGameViewController.swift in Sources */,
 				1104057A1D65A4A80045F1E1 /* YLMainViewController.swift in Sources */,
 				11E014FB1D629F950034181B /* AppDelegate.swift in Sources */,

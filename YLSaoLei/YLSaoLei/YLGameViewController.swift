@@ -14,6 +14,7 @@ class YLGameViewController: UIViewController {
     let stepLabel = UILabel()
     let timeLabel = UILabel()
     let bomeLabel = UILabel()
+    var boomArray = [Int]()
     var timer = NSTimer()
     let gameBackView = UIView()
     
@@ -31,7 +32,8 @@ class YLGameViewController: UIViewController {
     var leftBome :Int? {
         didSet {
             
-             bomeLabel.text = String.localizedStringWithFormat("老婆加油！还有%d颗地雷没被发现", leftBome!) as String
+            // bomeLabel.text = String.localizedStringWithFormat("老婆加油！还有%d颗地雷没被发现", leftBome!) as String
+            bomeLabel.attributedText = leftBomeChanged(leftBome!)
         }
     }
     
@@ -171,6 +173,7 @@ class YLGameViewController: UIViewController {
     //标记
     func signButtonAction(){
         
+        
     }
     
     //创建游戏界面
@@ -188,8 +191,9 @@ class YLGameViewController: UIViewController {
             
             for indexY in 0..<LEVEL_ONE {
                 
-                let button = UIButton()
+                let button = YLButton()
                 button.tag = 10*index+indexY+200;
+                button.tapButton = NotTap;
                 button.setBackgroundImage(UIImage(named: "game_mine_default"), forState: .Normal)
                 self.gameBackView.addSubview(button)
                 let height = CGFloat(index)*(btnWidth+2)
@@ -202,17 +206,24 @@ class YLGameViewController: UIViewController {
             }
             
         }
+        
+        
     
         
     }
     
-    func leftBomeChanged(leftBome:Int) -> NSAttributedString {
-        let returnAttributedString = NSMutableAttributedString.init(string:String.localizedStringWithFormat("老婆加油！还有%d颗地雷没被发现", leftBome))
-        let string = String.localizedStringWithFormat("%d", leftBome)
-        let freRange = returnAttributedString.string.rangeOfString(string) as! NSRange
-        let attributesDict = [NSForegroundColorAttributeName:UIColor.greenColor()]
-        returnAttributedString.setAttributes(attributesDict, range:freRange)
-        return returnAttributedString;
+    func leftBomeChanged(leftBome:Int) -> NSMutableAttributedString {
+        
+        let text = "老婆加油！还有\(leftBome)颗地雷没被发现"
+        let highlightText = "\(leftBome)"
+        
+       // let hightlightTextRange = text.rangeOfString(highlightText as String) as! NSRange
+        let attributeStr = NSMutableAttributedString.init(string: text as String)
+        let greencolor = UIColor.init(red: 72/255.0, green: 143/255.0, blue: 19/255.0, alpha: 1)
+        attributeStr.addAttribute(NSBackgroundColorAttributeName, value: greencolor, range: NSMakeRange(7, highlightText.lengthOfBytesUsingEncoding(NSUTF8StringEncoding)))
+        
+        return attributeStr
+
         
     }
     

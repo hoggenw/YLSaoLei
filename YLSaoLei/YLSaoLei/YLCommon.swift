@@ -14,3 +14,8 @@ let MAIN_HEIGHT = UIScreen.mainScreen().bounds.size.height
 let MAIN_WIDTH = UIScreen.mainScreen().bounds.size.width
 
 let LEVEL_ONE = 10;
+
+enum ButtonTap:Int {
+    case NotTap
+    case AlreadyTap
+}
