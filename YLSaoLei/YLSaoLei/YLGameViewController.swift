@@ -8,6 +8,12 @@
 
 import UIKit
 
+
+public enum ButtonStatus:Int {
+    case NotTap = 1
+    case AlreadyTap = 2
+}
+
 class YLGameViewController: UIViewController {
     
     let titleLabel = UILabel()
@@ -169,6 +175,8 @@ class YLGameViewController: UIViewController {
     func refreshButtonAction(){
         self.step = 0
         self.time = 0
+        
+        setupGameView()
     }
     //标记
     func signButtonAction(){
@@ -187,13 +195,18 @@ class YLGameViewController: UIViewController {
             make.height.equalTo(MAIN_WIDTH-20)
         }
         
+        //获取10位随机数组
+        
+        
         for index in 0 ..< LEVEL_ONE {
             
             for indexY in 0..<LEVEL_ONE {
                 
                 let button = YLButton()
+                
+                button.buttonStatue = 0
                 button.tag = 10*index+indexY+200;
-                button.tapButton = NotTap;
+            
                 button.setBackgroundImage(UIImage(named: "game_mine_default"), forState: .Normal)
                 self.gameBackView.addSubview(button)
                 let height = CGFloat(index)*(btnWidth+2)
