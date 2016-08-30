@@ -16,6 +16,10 @@ class YLButton: UIButton {
 
     internal var  buttonStatue :Int?
     var ifMine:Bool?
+    var buttonIfSign:Bool?
+    var showNumber:Int?
+    
+    
     
     override init(frame: CGRect) {
         super.init(frame: frame)

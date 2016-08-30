@@ -23,6 +23,7 @@ class YLGameViewController: UIViewController {
     var boomArray = [Int]()
     var timer = NSTimer()
     let gameBackView = UIView()
+    var ifSign = false
     
     var step :Int? {
         didSet {
@@ -88,7 +89,7 @@ class YLGameViewController: UIViewController {
             
         }
         //创建游戏界面
-        setupGameView()
+        setupGameView(false)
         
         //bak_line2_text
         leftBome = 10
@@ -176,16 +177,18 @@ class YLGameViewController: UIViewController {
         self.step = 0
         self.time = 0
         
-        setupGameView()
+        setupGameView(true)
     }
     //标记
     func signButtonAction(){
+        
+        ifSign = !ifSign
         
         
     }
     
     //创建游戏界面
-    func setupGameView(){
+    func setupGameView(ifRefresh:Bool){
         let btnWidth:CGFloat = (MAIN_WIDTH - 20 - 7*2)/10
         gameBackView.backgroundColor = UIColor.clearColor()
         self.view .addSubview(gameBackView)
@@ -195,33 +198,140 @@ class YLGameViewController: UIViewController {
             make.height.equalTo(MAIN_WIDTH-20)
         }
         
-        //获取10位随机数组
+       
         
-        
-        for index in 0 ..< LEVEL_ONE {
-            
-            for indexY in 0..<LEVEL_ONE {
+        if ifRefresh == false {
+            for index in 0 ..< LEVEL_ONE {
                 
-                let button = YLButton()
-                
-                button.buttonStatue = 0
-                button.tag = 10*index+indexY+200;
-            
-                button.setBackgroundImage(UIImage(named: "game_mine_default"), forState: .Normal)
-                self.gameBackView.addSubview(button)
-                let height = CGFloat(index)*(btnWidth+2)
-                button.snp_makeConstraints(closure: { (make) in
-                     make.top.equalTo(self.gameBackView.snp_top).offset(height)
-                     make.height.width.equalTo(btnWidth)
-                     make.left.equalTo(CGFloat(indexY)*(btnWidth+2))
-                })
+                for indexY in 0..<LEVEL_ONE {
+                    
+                    let button = YLButton()
+                    
+                    button.buttonStatue = 0
+                    
+                    button.ifMine = false
+                    
+                    button.showNumber = 0
+                    
+                    button.buttonIfSign = false
+                    
+                    button.tag = 10*index+indexY+200;
+                    
+                    // print("\(button.tag)\n")
+                    
+                    button.setBackgroundImage(UIImage(named: "game_mine_default"), forState: .Normal)
+                    button.addTarget(self, action: #selector(buttonAction(_:)), forControlEvents: .TouchUpInside)
+                    self.gameBackView.addSubview(button)
+                    let height = CGFloat(index)*(btnWidth+2)
+                    button.snp_makeConstraints(closure: { (make) in
+                        make.top.equalTo(self.gameBackView.snp_top).offset(height)
+                        make.height.width.equalTo(btnWidth)
+                        make.left.equalTo(CGFloat(indexY)*(btnWidth+2))
+                    })
+                    
+                }
                 
             }
+        }else {
+            for index in 0 ..< LEVEL_ONE {
+                
+                for indexY in 0..<LEVEL_ONE {
+                    
+                    let button = self.gameBackView.viewWithTag(Int((10*index+indexY+200) as NSNumber)) as! YLButton
+                    
+                    button.buttonStatue = 0
+                    
+                    button.ifMine = false
+                    
+                    button.buttonIfSign = false
+                    
+                    button.showNumber = 0
+
+                    button.setImage(UIImage(named: ""), forState: .Normal)
+                    
+                    button.setBackgroundImage(UIImage(named: "game_mine_default"), forState: .Normal)
+
+                    
+                }
+                
+            }
+        }
+
+        
+        let randomNumbers = randomNumber();
+        
+        
+        for index in randomNumbers {
+            let button = self.gameBackView.viewWithTag(Int(index as! NSNumber)) as! YLButton
+            button.ifMine = true;
             
         }
         
+        //获取周边地雷数量
         
+        
+        
+        
+    }
+    //200-299的10个不重复的随机数
+    func randomNumber() -> NSArray {
+        var randomNumbers = [Int]()
+        
+        while randomNumbers.count < 10 {
+            let number = arc4random()%100 + 200
+            var addBool = true
+            
+            for index in randomNumbers {
+                if index == Int(number) {
+                    addBool = false
+                }
+            }
+            
+            if addBool == true {
+                randomNumbers.append(Int(number))
+            }
+            
+            
+        }
+        
+        return randomNumbers
+        
+    }
     
+    //点击按钮
+    func buttonAction(sender:YLButton){
+        
+        if ifSign {
+            if sender.buttonStatue == 0  {
+                
+       
+                if sender.buttonIfSign == true {
+                    sender.buttonIfSign = false
+                    sender.setImage(UIImage(named: ""), forState: .Normal)
+                }else {
+                    sender.buttonIfSign = true
+                   sender.setImage(UIImage(named: "game_mine_flag"), forState: .Normal)
+                }
+
+                return
+            }
+        }
+        
+        if sender.buttonStatue == 0 {
+            
+            sender.buttonStatue = 1;
+             sender.setBackgroundImage(UIImage(named: "game_mine_none_9"), forState: .Normal)
+            
+            
+            if sender.ifMine == true {
+                sender.setImage(UIImage(named: "game_dailog_mine"), forState: .Normal)
+                
+            }
+            
+            
+            
+            
+        }
         
     }
     
