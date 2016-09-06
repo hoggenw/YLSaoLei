@@ -24,10 +24,31 @@ class YLGameViewController: UIViewController {
     var timer = NSTimer()
     let gameBackView = UIView()
     var ifSign = false
+    var upArray = [YLButton]()
+    var downArray = [YLButton]()
+    var leftArray = [YLButton]()
+    var rightArray = [YLButton]()
+    
+    var leftCount:Int? {
+        didSet {
+            if successJudge() {
+                let alertContr = UIAlertController(title: "胜利！胜利！", message: "老婆真是太厉害了！", preferredStyle: .Alert)
+                let cancelButton = UIAlertAction(title: "本宫知道了", style: .Cancel, handler: nil)
+                let playAgainButton = UIAlertAction(title: "再来一把", style: .Default, handler: { (UIAlertAction) in
+                    self.refreshButtonAction()
+                })
+                alertContr.addAction(cancelButton)
+                alertContr.addAction(playAgainButton)
+                self.presentViewController(alertContr, animated: true, completion: nil)
+            }
+        }
+    }
+    
     
     var step :Int? {
         didSet {
             stepLabel.text = NSString.localizedStringWithFormat("步数：%04d", step!) as String
+
         }
     }
     var time :Int? {
@@ -41,6 +62,16 @@ class YLGameViewController: UIViewController {
             
             // bomeLabel.text = String.localizedStringWithFormat("老婆加油！还有%d颗地雷没被发现", leftBome!) as String
             bomeLabel.attributedText = leftBomeChanged(leftBome!)
+            if successJudge() {
+                let alertContr = UIAlertController(title: "胜利！胜利！", message: "老婆真是太厉害了！", preferredStyle: .Alert)
+                let cancelButton = UIAlertAction(title: "本宫知道了", style: .Cancel, handler: nil)
+                let playAgainButton = UIAlertAction(title: "再来一把", style: .Default, handler: { (UIAlertAction) in
+                    self.refreshButtonAction()
+                })
+                alertContr.addAction(cancelButton)
+                alertContr.addAction(playAgainButton)
+                self.presentViewController(alertContr, animated: true, completion: nil)
+            }
         }
     }
     
@@ -172,11 +203,11 @@ class YLGameViewController: UIViewController {
         NSRunLoop.currentRunLoop().addTimer(timer, forMode:NSDefaultRunLoopMode)
     }
     
-    //刷新
+    //MARK:/*刷新**/
     func refreshButtonAction(){
         self.step = 0
         self.time = 0
-        
+        self.leftBome = LEVEL
         setupGameView(true)
     }
     //标记
@@ -201,9 +232,9 @@ class YLGameViewController: UIViewController {
        
         
         if ifRefresh == false {
-            for index in 0 ..< LEVEL_ONE {
+            for index in 0 ..< LEVEL {
                 
-                for indexY in 0..<LEVEL_ONE {
+                for indexY in 0..<LEVEL {
                     
                     let button = YLButton()
                     
@@ -232,12 +263,14 @@ class YLGameViewController: UIViewController {
                 }
                 
             }
+            
         }else {
-            for index in 0 ..< LEVEL_ONE {
+            for index in 0 ..< LEVEL {
                 
-                for indexY in 0..<LEVEL_ONE {
+                for indexY in 0..<LEVEL {
                     
                     let button = self.gameBackView.viewWithTag(Int((10*index+indexY+200) as NSNumber)) as! YLButton
+                    
                     
                     button.buttonStatue = 0
                     
@@ -257,8 +290,9 @@ class YLGameViewController: UIViewController {
             }
         }
 
-        
         let randomNumbers = randomNumber();
+        
+        print("randomNumbers.count=\(randomNumbers.count)")
         
         
         for index in randomNumbers {
@@ -266,8 +300,104 @@ class YLGameViewController: UIViewController {
             button.ifMine = true;
             
         }
+
         
         //获取周边地雷数量
+        
+        for index in 0..<100 {
+            
+            let nowButton = self.gameBackView.viewWithTag(index+200) as! YLButton
+            
+            if nowButton.ifMine == true {
+                continue
+            }
+            //中间2个
+            let midLeft = index % 10 - 1
+            if midLeft >= 0 {
+                let button = self.gameBackView.viewWithTag(Int(index+200-1 as NSNumber)) as! YLButton
+                if button.ifMine == true {
+                    nowButton.showNumber? += 1
+                    
+                }
+                
+            }
+            
+            if (index+1)%10 != 0 {
+                let button = self.gameBackView.viewWithTag(Int(index+200+1 as NSNumber)) as! YLButton
+                if button.ifMine == true {
+                    nowButton.showNumber? += 1
+                    
+                }
+            }
+            
+            
+            //上边3个
+            let upMid = index-10;
+            
+            if upMid >= 0 {
+                
+                let button = self.gameBackView.viewWithTag(Int(upMid+200 as NSNumber)) as! YLButton
+                if button.ifMine == true {
+                    nowButton.showNumber? += 1
+                    
+                }
+                
+                if upMid%10-1 >= 0 {
+                    let button = self.gameBackView.viewWithTag(Int(upMid+200-1 as NSNumber)) as! YLButton
+                    if button.ifMine == true {
+                        nowButton.showNumber? += 1
+                        
+                    }
+                }
+                
+                if (upMid+1) % 10 != 0 {
+                    
+                    let button = self.gameBackView.viewWithTag(Int(upMid+200+1 as NSNumber)) as! YLButton
+                    if button.ifMine == true {
+                        nowButton.showNumber? += 1
+                        
+                    }
+                }
+                
+                
+            }
+            
+            //下边三个
+            let downMid = index+10;
+            
+            if downMid <= 99 {
+                
+                let button = self.gameBackView.viewWithTag(Int(downMid+200 as NSNumber)) as! YLButton
+                if button.ifMine == true {
+                    nowButton.showNumber? += 1
+                    
+                }
+                
+                if downMid%10-1 >= 0 {
+                    let button = self.gameBackView.viewWithTag(Int(downMid+200-1 as NSNumber)) as! YLButton
+                    if button.ifMine == true {
+                        nowButton.showNumber? += 1
+                        
+                    }
+                }
+                
+                if (downMid+1) % 10 != 0 {
+                    
+                    let button = self.gameBackView.viewWithTag(Int(downMid+200+1 as NSNumber)) as! YLButton
+                    if button.ifMine == true {
+                        nowButton.showNumber? += 1
+                        
+                    }
+                }
+                
+                
+            }
+            
+            
+            
+            
+            
+        }
         
         
         
@@ -298,29 +428,216 @@ class YLGameViewController: UIViewController {
         
     }
     
-    //点击按钮
+    //MARK:点击按钮
     func buttonAction(sender:YLButton){
+
+
+        
         
         if ifSign {
             if sender.buttonStatue == 0  {
                 
-       
-                if sender.buttonIfSign == true {
-                    sender.buttonIfSign = false
-                    sender.setImage(UIImage(named: ""), forState: .Normal)
-                }else {
-                    sender.buttonIfSign = true
-                   sender.setImage(UIImage(named: "game_mine_flag"), forState: .Normal)
+                if self.leftBome >= 0 {
+                    if sender.buttonIfSign == true {
+                        self.leftBome = leftBome!+1;
+                        sender.buttonIfSign = false
+                        sender.setImage(UIImage(named: ""), forState: .Normal)
+                    }else {
+                        if self.leftBome>0 {
+                            
+                            self.leftBome = self.leftBome!-1
+                            sender.buttonIfSign = true
+                            sender.setImage(UIImage(named: "game_mine_flag"), forState: .Normal)
+                        }
+
+                    }
                 }
+  
 
                 return
             }
         }
+        if sender.buttonIfSign == true {
+            return
+        }
+
         
+        
+        if sender.ifMine == true {
+            let alertContr = UIAlertController(title: "踩到炸弹了", message: "没关系的，老婆加油！", preferredStyle: .Alert)
+            let cancelButton = UIAlertAction(title: "悄悄离开", style: .Cancel, handler:  { (UIAlertAction) in
+                self.navigationController?.popViewControllerAnimated(true)
+            })
+            let playAgainButton = UIAlertAction(title: "再来一把", style: .Default, handler: { (UIAlertAction) in
+                self.refreshButtonAction()
+            })
+            alertContr.addAction(cancelButton)
+            alertContr.addAction(playAgainButton)
+            self.presentViewController(alertContr, animated: true, completion: nil)
+        }
+        
+        if sender.buttonIfSign == false {
+            if sender.buttonStatue == 0 {
+                self.step = self.step! + 1;
+            }
+            
+            buttonDeal(sender)
+     
+            
+            //如果是空白
+            if sender.showNumber == 0 && sender.ifMine == false {
+                
+                aroundButtonDeal(sender)
+            }
+            
+            var leftMines = [YLButton]();
+            
+            leftMines.removeAll()
+            for index in 0..<100 {
+                let nowButton = self.gameBackView.viewWithTag(index+200) as! YLButton
+                if nowButton.buttonStatue == 0 {
+                    leftMines.append(nowButton);
+                }
+               // print("leftMines.count=\(leftMines.count)")
+                if leftMines.count>=11 {
+                    break;
+                }
+            }
+            self.leftCount = leftMines.count
+        }
+        
+
+        
+    }
+    //MARK:空白点击递归判断
+    /**空白点击递归判断*/
+    func aroundButtonDeal(sender:YLButton) {
+        //中间2个
+        let midLeft = sender.tag % 10 - 1
+        if midLeft >= 0 {
+            let button = self.gameBackView.viewWithTag(Int(sender.tag-1 as NSNumber)) as! YLButton
+            if button.ifMine != true && button.buttonStatue == 0 && button.buttonIfSign == false {
+               buttonDeal(button)
+                if button.showNumber == 0 {
+                    aroundButtonDeal(button)
+                }
+                
+            }
+            
+        }
+        
+        if (sender.tag+1)%10 != 0 {
+            let button = self.gameBackView.viewWithTag(Int(sender.tag+1 as NSNumber)) as! YLButton
+            if button.ifMine != true && button.buttonStatue == 0 && button.buttonIfSign == false {
+                buttonDeal(button)
+                if button.showNumber == 0 {
+                    aroundButtonDeal(button)
+                }
+                
+            }
+        }
+
+        //上边3个
+        let upMid = Int(sender.tag)-200-10;
+        
+        if upMid >= 0 {
+            
+            let button = self.gameBackView.viewWithTag(Int(sender.tag-10 as NSNumber)) as! YLButton
+            if button.ifMine != true && button.buttonStatue == 0 && button.buttonIfSign == false {
+                buttonDeal(button)
+                if button.showNumber == 0 {
+                    aroundButtonDeal(button)
+                }
+                
+            }
+            
+            if upMid%10-1 >= 0 {
+                let button = self.gameBackView.viewWithTag(Int(sender.tag-10-1 as NSNumber)) as! YLButton
+                
+                if button.ifMine != true && button.buttonStatue == 0 && button.buttonIfSign == false {
+                    buttonDeal(button)
+                    if button.showNumber == 0 {
+                        aroundButtonDeal(button)
+                    }
+                    
+                }
+            }
+            
+            if (upMid+1) % 10 != 0 {
+                
+                let button = self.gameBackView.viewWithTag(Int(sender.tag-10+1 as NSNumber)) as! YLButton
+                if button.ifMine != true && button.buttonStatue == 0 && button.buttonIfSign == false {
+                    buttonDeal(button)
+                    if button.showNumber == 0 {
+                        aroundButtonDeal(button)
+                    }
+                    
+                }
+            }
+            
+            
+        }
+        
+        //下边三个
+        let downMid = sender.tag-200+10;
+        
+        if downMid <= 99 {
+            
+            let button = self.gameBackView.viewWithTag(Int(sender.tag+10 as NSNumber)) as! YLButton
+            
+            if button.ifMine != true && button.buttonStatue == 0 && button.buttonIfSign == false {
+                buttonDeal(button)
+                if button.showNumber == 0 {
+                    aroundButtonDeal(button)
+                }
+                
+            }
+            
+            if downMid%10-1 >= 0 {
+                let button = self.gameBackView.viewWithTag(Int(sender.tag+10-1 as NSNumber)) as! YLButton
+                
+                if button.ifMine != true && button.buttonStatue == 0 && button.buttonIfSign == false {
+                    buttonDeal(button)
+                    if button.showNumber == 0 {
+                        aroundButtonDeal(button)
+                    }
+                    
+                }
+            }
+            
+            if (downMid+1) % 10 != 0 {
+                
+                let button = self.gameBackView.viewWithTag(Int(sender.tag+10+1 as NSNumber)) as! YLButton
+                if button.ifMine != true && button.buttonStatue == 0 && button.buttonIfSign == false {
+                    buttonDeal(button)
+                    if button.showNumber == 0 {
+                        aroundButtonDeal(button)
+                    }
+                    
+                }
+            }
+    }
+}
+    
+
+    //MARK:胜利条件
+    
+    func successJudge() ->Bool {
+        
+        if self.leftBome == 0 && self.leftCount==10 {
+            return true;
+        }
+        return false;
+    }
+    
+    
+    //button处理
+    
+    func buttonDeal(sender:YLButton){
         if sender.buttonStatue == 0 {
             
             sender.buttonStatue = 1;
-             sender.setBackgroundImage(UIImage(named: "game_mine_none_9"), forState: .Normal)
+            sender.setBackgroundImage(UIImage(named: "game_mine_none_9"), forState: .Normal)
             
             
             if sender.ifMine == true {
@@ -328,11 +645,14 @@ class YLGameViewController: UIViewController {
                 
             }
             
+            if sender.showNumber > 0 {
+                sender.setImage(UIImage(named: String.init(format: "mine_number_%d", sender.showNumber!)), forState: .Normal)
+            }
+            
             
             
             
         }
-        
     }
     
     func leftBomeChanged(leftBome:Int) -> NSMutableAttributedString {
